@@ -5,6 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Lightweight web">
         <meta name="theme-color" content="#RRGGBB">
+        <script>
+            window.addEventListener("unload", function(event) {
+                // Your JavaScript code to be executed before the page unloads.
+                // You can perform cleanup tasks or prompt the user to confirm the navigation.
+                var confirmationMessage = "Are you sure you want to leave this page?";
+                (event || window.event).returnValue = confirmationMessage;
+                return confirmationMessage;
+            });
+        </script>
         <title>Lightweight Web</title>
         <style>
             body {
