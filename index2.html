@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speed of Light Calculator</title>
+</head>
+<body>
+    <h1>Speed of Light Calculator</h1>
+    <form id="calculator-form">
+        <label for="star">Select a star (for distance):</label>
+        <select id="star">
+            <option value="299792458">Speed of Light (Default)</option>
+            <option value="9.461e+15">Proxima Centauri</option>
+            <option value="3.844e+16">Moon</option>
+            <option value="9.461e+16">Alpha Centauri A</option>
+            <option value="9.461e+16">Alpha Centauri B</option>
+            <option value="4.014e+17">Barnard's Star</option>
+            <option value="4.368e+17">Wolf 359</option>
+            <option value="4.014e+18">Luhman 16</option>
+            <option value="6.327e+18">Sirius</option>
+            <option value="1.277e+19">Epsilon Eridani</option>
+            <option value="3.949e+19">Tau Ceti</option>
+        </select><br><br>
+        
+        <label for="years">Years for the trip:</label>
+        <select id="years">
+            <option value="1">1 year</option>
+            <option value="2">2 years</option>
+            <option value="3">3 years</option>
+            <!-- Add more options as needed -->
+        </select><br><br>
+
+        <label for="velocity">Velocity (m/s):</label>
+        <input type="number" id="velocity" step="any"><br><br>
+        
+        <input type="button" value="Calculate Speed of Light" onclick="calculateSpeedOfLight()">
+    </form>
+
+    <p>Result: <span id="result"></span></p>
+
+    <script>
+        function calculateSpeedOfLight() {
+            const selectedStar = parseFloat(document.getElementById("star").value);
+            const years = parseFloat(document.getElementById("years").value);
+            const velocity = parseFloat(document.getElementById("velocity").value);
+
+            if (isNaN(selectedStar) || isNaN(years) || isNaN(velocity)) {
+                alert("Please provide values for two of the three options: star, years, or velocity.");
+                return;
+            }
+
+            if (selectedStar === 299792458) {
+                const distance = velocity * years * 365.25 * 24 * 60 * 60; // Convert years to seconds
+                document.getElementById("result").textContent = "Distance: " + distance.toFixed(2) + " m";
+            } else if (years === 1) {
+                const velocityValue = selectedStar / (years * 365.25 * 24 * 60 * 60);
+                document.getElementById("result").textContent = "Velocity: " + velocityValue.toFixed(2) + " m/s";
+            } else {
+                const time = selectedStar / velocity;
+                document.getElementById("result").textContent = "Time: " + time.toFixed(2) + " years";
+            }
+        }
+    </script>
+</body>
+</html>
